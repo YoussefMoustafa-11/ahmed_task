@@ -4,6 +4,6 @@ class AppRoutes {
   static const String registerView = "/registerView";
   static const String homeView = "/homeView";
   static const String commentsView = "/commentsView";
-
-   static String createPostView = "/createPostView";
+  static String createPostView = "/createPostView";
+  static String profileView = "/profileView";
 }

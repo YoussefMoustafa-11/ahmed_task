@@ -3,13 +3,14 @@ import 'package:ahmed_task/feature/auth/presentation/view/register/view/register
 import 'package:ahmed_task/feature/comments/presentation/view/comments_view.dart';
 import 'package:ahmed_task/feature/create_post/presentation/view/create_post.dart';
 import 'package:ahmed_task/feature/home/presentation/view/home_view.dart';
+import 'package:ahmed_task/feature/profile/presentation/view/profile_view.dart';
 import 'package:ahmed_task/feature/splash/presentation/view/splash_view.dart';
 import 'package:ahmed_task/feature/auth/presentation/view/login/view/login_view.dart';
 import 'package:go_router/go_router.dart';
 
 class RouterGenerationConfig {
   static final goRouter = GoRouter(
-    initialLocation: AppRoutes.homeView,
+    initialLocation: AppRoutes.profileView,
     routes: [
       GoRoute(
         path: AppRoutes.splashView,
@@ -46,6 +47,11 @@ class RouterGenerationConfig {
         path: AppRoutes.createPostView,
         name: AppRoutes.createPostView,
         builder: (context, state) => const CreatePostView(),
+      ),
+      GoRoute(
+        path: AppRoutes.profileView,
+        name: AppRoutes.profileView,
+        builder: (context, state) => const ProfileView(),
       ),
     ],
   );

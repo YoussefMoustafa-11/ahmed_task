@@ -49,6 +49,7 @@ class _CreatePostViewState extends State<CreatePostView> {
         duration: const Duration(seconds: 2),
       ),
     );
+    Navigator.pop(context);
   }
 
   @override
@@ -70,9 +71,7 @@ class _CreatePostViewState extends State<CreatePostView> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomActionBar(
-        onImageSelected: _getSelectedImage,
-      ),
+      bottomNavigationBar: BottomActionBar(onImageSelected: _getSelectedImage),
     );
   }
 }
