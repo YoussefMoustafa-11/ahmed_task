@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:ahmed_task/Core/themes/app_color.dart';
 import 'package:ahmed_task/Core/themes/app_text_style.dart';
+import 'package:image_picker/image_picker.dart';
 
 class BottomActionBar extends StatelessWidget {
-  const BottomActionBar({super.key});
+  final Function(XFile?) onImageSelected;
+
+  const BottomActionBar({
+    super.key,
+    required this.onImageSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,14 @@ class BottomActionBar extends StatelessWidget {
             children: [
               Expanded(
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    // Example of using ImagePicker to select an image from the gallery
+                    ImagePicker().pickImage(source: ImageSource.gallery).then((
+                      pickedFile,
+                    ) {
+                      onImageSelected(pickedFile);
+                    });
+                  },
                   child: Container(
                     height: 48,
                     decoration: BoxDecoration(
@@ -32,11 +45,7 @@ class BottomActionBar extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.image,
-                          size: 20,
-                          color: AppColors.primary,
-                        ),
+                        Icon(Icons.image, size: 20, color: AppColors.primary),
                         const SizedBox(width: 8),
                         Text(
                           'Upload Image',
@@ -51,20 +60,11 @@ class BottomActionBar extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
-              _ActionIconButton(
-                icon: Icons.videocam,
-                onTap: () {},
-              ),
+              _ActionIconButton(icon: Icons.videocam, onTap: () {}),
               const SizedBox(width: 4),
-              _ActionIconButton(
-                icon: Icons.location_on,
-                onTap: () {},
-              ),
+              _ActionIconButton(icon: Icons.location_on, onTap: () {}),
               const SizedBox(width: 4),
-              _ActionIconButton(
-                icon: Icons.mood,
-                onTap: () {},
-              ),
+              _ActionIconButton(icon: Icons.mood, onTap: () {}),
             ],
           ),
           const SizedBox(height: 8),
@@ -88,10 +88,7 @@ class _ActionIconButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback onTap;
 
-  const _ActionIconButton({
-    required this.icon,
-    required this.onTap,
-  });
+  const _ActionIconButton({required this.icon, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -100,14 +97,8 @@ class _ActionIconButton extends StatelessWidget {
       child: Container(
         width: 48,
         height: 48,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Icon(
-          icon,
-          size: 20,
-          color: Colors.grey[600],
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+        child: Icon(icon, size: 20, color: Colors.grey[600]),
       ),
     );
   }

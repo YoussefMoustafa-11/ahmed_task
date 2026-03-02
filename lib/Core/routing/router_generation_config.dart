@@ -9,7 +9,7 @@ import 'package:go_router/go_router.dart';
 
 class RouterGenerationConfig {
   static final goRouter = GoRouter(
-    initialLocation: AppRoutes.splashView,
+    initialLocation: AppRoutes.homeView,
     routes: [
       GoRoute(
         path: AppRoutes.splashView,
@@ -42,11 +42,11 @@ class RouterGenerationConfig {
           );
         },
       ),
-      GoRoute( 
-        path:   AppRoutes.createPostView,
+      GoRoute(
+        path: AppRoutes.createPostView,
         name: AppRoutes.createPostView,
         builder: (context, state) => const CreatePostView(),
-      )
+      ),
     ],
   );
 }

@@ -87,6 +87,7 @@ class _UserProfileSectionState extends State<UserProfileSection> {
         padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          // In a real app, these options would likely come from a more dynamic source
           children: ['Public', 'Friends', 'Private'].map((option) {
             return ListTile(
               title: Text(option),

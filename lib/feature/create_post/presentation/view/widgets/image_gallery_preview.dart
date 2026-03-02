@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:ahmed_task/Core/themes/app_text_style.dart';
 import 'package:ahmed_task/feature/create_post/presentation/view/widgets/image_card.dart';
 import 'package:ahmed_task/feature/create_post/presentation/view/widgets/add_more_image_button.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ImageGalleryPreview extends StatelessWidget {
   final List<String> images;
   final Function(int) onRemoveImage;
+  final Function(XFile?) onImageSelected;
 
   const ImageGalleryPreview({
     super.key,
     required this.images,
     required this.onRemoveImage,
+    required this.onImageSelected,
   });
 
   @override
@@ -55,7 +58,9 @@ class ImageGalleryPreview extends StatelessWidget {
                 ...List.generate(
                   images.length,
                   (index) => Padding(
-                    padding: EdgeInsets.only(right: index == images.length - 1 ? 0 : 12),
+                    padding: EdgeInsets.only(
+                      right: index == images.length - 1 ? 0 : 12,
+                    ),
                     child: SizedBox(
                       width: 120,
                       child: ImageCard(
@@ -66,10 +71,13 @@ class ImageGalleryPreview extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 12),
-                SizedBox(
-                  width: 120,
-                  child: AddMoreImageButton(onTap: () {}),
-                ),
+                SizedBox(width: 120, child: AddMoreImageButton(onTap: () {
+                    ImagePicker().pickImage(source: ImageSource.gallery).then((
+                      pickedFile,
+                    ) {
+                      onImageSelected(pickedFile);
+                    });
+                })),
               ],
             ),
           ),

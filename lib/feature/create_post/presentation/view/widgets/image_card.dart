@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class ImageCard extends StatelessWidget {
@@ -19,8 +21,8 @@ class ImageCard extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Image.network(
-              imageUrl,
+            Image.file(
+              File(imageUrl),
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
@@ -29,6 +31,16 @@ class ImageCard extends StatelessWidget {
                 );
               },
             ),
+            // Image.network(
+            //   imageUrl,
+            //   fit: BoxFit.cover,
+            //   errorBuilder: (context, error, stackTrace) {
+            //     return Container(
+            //       color: Colors.grey[300],
+            //       child: const Icon(Icons.image),
+            //     );
+            //   },
+            // ),
             Positioned(
               top: 8,
               right: 8,
