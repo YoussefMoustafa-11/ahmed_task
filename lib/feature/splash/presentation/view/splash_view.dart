@@ -1,4 +1,6 @@
+import 'package:ahmed_task/Core/routing/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'widgets/logo_image.dart';
 import 'widgets/main_title.dart';
 import 'widgets/tag_line.dart';
@@ -49,7 +51,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
     // Navigate after animations complete
     Future.delayed(const Duration(seconds: 5), () {
       if (mounted) {
-        // Navigator.of(context).pushReplacementNamed('/home');
+        GoRouter.of(context).pushReplacementNamed(AppRoutes.logInView);
       }
     });
   }

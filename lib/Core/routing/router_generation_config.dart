@@ -1,16 +1,27 @@
 import 'package:ahmed_task/Core/routing/app_routes.dart';
+import 'package:ahmed_task/feature/auth/presentation/view/register/view/register.dart';
 import 'package:ahmed_task/feature/splash/presentation/view/splash_view.dart';
+import 'package:ahmed_task/feature/auth/presentation/view/login/view/login_view.dart';
 import 'package:go_router/go_router.dart';
 
 class RouterGenerationConfig {
   static final goRouter = GoRouter(
-    initialLocation: AppRoutes.splashScreen,
-
+    initialLocation: AppRoutes.splashView,
     routes: [
       GoRoute(
-        path: AppRoutes.splashScreen,
-        name: AppRoutes.splashScreen,
+        path: AppRoutes.splashView,
+        name: AppRoutes.splashView,
         builder: (context, state) => const SplashView(),
+      ),
+      GoRoute(
+        path: AppRoutes.logInView,
+        name: AppRoutes.logInView,
+        builder: (context, state) => const LoginView(),
+      ),
+      GoRoute(
+        path: AppRoutes.registerView,
+        name: AppRoutes.registerView,
+        builder: (context, state) => const RegisterView(),
       ),
     ],
   );
