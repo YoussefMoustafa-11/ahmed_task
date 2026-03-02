@@ -67,7 +67,7 @@ class _ActionButtonState extends State<_ActionButton> {
         height: 44,
         decoration: BoxDecoration(
           color: _isPressed
-              ? widget.backgroundColor.withOpacity(0.8)
+              ? widget.backgroundColor.withValues(alpha: 0.8)
               : widget.backgroundColor,
           borderRadius: BorderRadius.circular(8),
         ),

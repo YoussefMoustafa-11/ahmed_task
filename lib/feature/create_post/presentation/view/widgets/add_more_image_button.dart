@@ -31,7 +31,7 @@ class AddMoreImageButton extends StatelessWidget {
                 height: 40,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.primary.withOpacity(0.1),
+                  color: AppColors.primary.withValues(alpha: 0.1),
                 ),
                 child: Icon(
                   Icons.add_photo_alternate,

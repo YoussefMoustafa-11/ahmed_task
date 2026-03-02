@@ -31,7 +31,7 @@ class CommentCard extends StatelessWidget {
         border: Border.all(color: Colors.grey[200]!, width: 0.5),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 2,
           ),
         ],
