@@ -79,7 +79,7 @@ class _RegisterViewState extends State<RegisterView> {
               CustomTextField(
                 controller: _passwordController,
                 isPassword: true,
-                hintText: "..........",
+                hintText: '•' * 8,
                 prefixIcon: Icons.lock_outline,
               ),
               const SizedBox(height: 16),

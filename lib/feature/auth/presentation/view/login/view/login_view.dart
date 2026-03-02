@@ -70,7 +70,7 @@ class _LoginViewState extends State<LoginView> {
               CustomTextField(
                 controller: _passwordController,
                 isPassword: true,
-                hintText: "..........",
+                hintText: '•' * 8 ,
                 prefixIcon: Icons.lock_outline,
               ),
               const SizedBox(height: 32),
@@ -79,6 +79,7 @@ class _LoginViewState extends State<LoginView> {
                 width: double.infinity,
                 onPressed: () {
                   // TODO: Implement sign in logic
+                  GoRouter.of(context).pushNamed(AppRoutes.homeView);
                 },
                 buttonText: "Sign In",
                 backgroundColor: AppColors.primary,

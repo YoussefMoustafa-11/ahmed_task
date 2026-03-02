@@ -1,5 +1,6 @@
 import 'package:ahmed_task/Core/routing/app_routes.dart';
 import 'package:ahmed_task/feature/auth/presentation/view/register/view/register.dart';
+import 'package:ahmed_task/feature/home/presentation/view/home_view.dart';
 import 'package:ahmed_task/feature/splash/presentation/view/splash_view.dart';
 import 'package:ahmed_task/feature/auth/presentation/view/login/view/login_view.dart';
 import 'package:go_router/go_router.dart';
@@ -22,6 +23,11 @@ class RouterGenerationConfig {
         path: AppRoutes.registerView,
         name: AppRoutes.registerView,
         builder: (context, state) => const RegisterView(),
+      ),
+      GoRoute(
+        path: AppRoutes.homeView,
+        name: AppRoutes.homeView,
+        builder: (context, state) => const HomeView(),
       ),
     ],
   );
