@@ -1,3 +1,4 @@
+import 'package:ahmed_task/Core/routing/app_routes.dart';
 import 'package:ahmed_task/feature/home/presentation/view/widgets/custom_home_app_bar.dart';
 import 'package:ahmed_task/Core/widgets/custom_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:ahmed_task/Core/themes/app_color.dart';
 
 import 'package:ahmed_task/feature/home/presentation/view/widgets/posts_section.dart';
 import 'package:ahmed_task/feature/home/presentation/view/widgets/stories_section.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -99,7 +101,7 @@ class _HomeViewState extends State<HomeView> {
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         onPressed: () {
-          // TODO: Create post
+          GoRouter.of(context).pushNamed(AppRoutes.createPostView);
         },
         backgroundColor: AppColors.primary,
         child: const Icon(Icons.add, color: AppColors.white),

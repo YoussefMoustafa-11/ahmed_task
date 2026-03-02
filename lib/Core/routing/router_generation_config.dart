@@ -1,6 +1,7 @@
 import 'package:ahmed_task/Core/routing/app_routes.dart';
 import 'package:ahmed_task/feature/auth/presentation/view/register/view/register.dart';
 import 'package:ahmed_task/feature/comments/presentation/view/comments_view.dart';
+import 'package:ahmed_task/feature/create_post/presentation/view/create_post.dart';
 import 'package:ahmed_task/feature/home/presentation/view/home_view.dart';
 import 'package:ahmed_task/feature/splash/presentation/view/splash_view.dart';
 import 'package:ahmed_task/feature/auth/presentation/view/login/view/login_view.dart';
@@ -41,6 +42,11 @@ class RouterGenerationConfig {
           );
         },
       ),
+      GoRoute( 
+        path:   AppRoutes.createPostView,
+        name: AppRoutes.createPostView,
+        builder: (context, state) => const CreatePostView(),
+      )
     ],
   );
 }
