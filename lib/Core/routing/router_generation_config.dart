@@ -1,5 +1,6 @@
 import 'package:ahmed_task/Core/routing/app_routes.dart';
 import 'package:ahmed_task/feature/auth/presentation/view/register/view/register.dart';
+import 'package:ahmed_task/feature/comments/presentation/view/comments_view.dart';
 import 'package:ahmed_task/feature/home/presentation/view/home_view.dart';
 import 'package:ahmed_task/feature/splash/presentation/view/splash_view.dart';
 import 'package:ahmed_task/feature/auth/presentation/view/login/view/login_view.dart';
@@ -28,6 +29,17 @@ class RouterGenerationConfig {
         path: AppRoutes.homeView,
         name: AppRoutes.homeView,
         builder: (context, state) => const HomeView(),
+      ),
+      GoRoute(
+        path: AppRoutes.commentsView,
+        name: AppRoutes.commentsView,
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          return CommentsView(
+            postTitle: extra?['postTitle'] as String? ?? '',
+            commentsCount: extra?['commentsCount'] as int? ?? 0,
+          );
+        },
       ),
     ],
   );

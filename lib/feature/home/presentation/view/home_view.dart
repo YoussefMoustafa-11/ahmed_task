@@ -1,6 +1,8 @@
+import 'package:ahmed_task/feature/home/presentation/view/widgets/custom_home_app_bar.dart';
+import 'package:ahmed_task/Core/widgets/custom_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:ahmed_task/Core/themes/app_color.dart';
-import 'package:ahmed_task/Core/themes/app_text_style.dart';
+
 import 'package:ahmed_task/feature/home/presentation/view/widgets/posts_section.dart';
 import 'package:ahmed_task/feature/home/presentation/view/widgets/stories_section.dart';
 
@@ -12,8 +14,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  int _currentIndex = 0;
-
   // Sample data - في التطبيق الحقيقي، البيانات تأتي من API
   final List<Map<String, dynamic>> stories = [
     {
@@ -85,39 +85,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
-      appBar: AppBar(
-        shape: const RoundedRectangleBorder(
-          side: BorderSide(color: AppColors.borderColor, width: 1),
-        ),
-        backgroundColor: AppColors.white,
-        elevation: 0,
-        surfaceTintColor: AppColors.white,
-        title: const Text('Home Feed', style: AppTextStyle.heading2),
-        centerTitle: true,
-        leading: Container(
-          margin: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: AppColors.primary.withOpacity(0.1),
-          ),
-          child: IconButton(
-            icon: const Icon(Icons.camera_alt_outlined),
-            color: AppColors.primary,
-            onPressed: () {
-              // TODO: Open camera
-            },
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            color: AppColors.darkText,
-            onPressed: () {
-              // TODO: Open search
-            },
-          ),
-        ],
-      ),
+      appBar: const CustomHomeAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -127,6 +95,7 @@ class _HomeViewState extends State<HomeView> {
           ],
         ),
       ),
+      // Floating Action Button
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         onPressed: () {
@@ -135,34 +104,8 @@ class _HomeViewState extends State<HomeView> {
         backgroundColor: AppColors.primary,
         child: const Icon(Icons.add, color: AppColors.white),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: AppColors.primary,
-        unselectedItemColor: AppColors.greyText,
-        selectedLabelStyle: const TextStyle(fontSize: 12),
-        unselectedLabelStyle: const TextStyle(fontSize: 12),
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.explore_outlined),
-            label: 'Explore',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_outlined),
-            label: 'Alerts',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'Profile',
-          ),
-        ],
-      ),
+      // CustomBottomNavigationBar
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }

@@ -1,9 +1,11 @@
+import 'package:ahmed_task/Core/routing/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:ahmed_task/Core/themes/app_color.dart';
 import 'package:ahmed_task/Core/themes/app_text_style.dart';
 import 'package:ahmed_task/feature/home/presentation/view/widgets/post_header.dart';
 import 'package:ahmed_task/feature/home/presentation/view/widgets/post_content.dart';
 import 'package:ahmed_task/feature/home/presentation/view/widgets/post_images.dart';
+import 'package:go_router/go_router.dart';
 
 class PostCard extends StatefulWidget {
   final String userImage;
@@ -120,7 +122,15 @@ class _PostCardState extends State<PostCard> {
 
                 // Comment Button
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    GoRouter.of(context).pushNamed(
+                      AppRoutes.commentsView,
+                      extra: {
+                        'postTitle': widget.content,
+                        "commentsCount": widget.commentsCount,
+                      },
+                    );
+                  },
                   child: Row(
                     children: [
                       const Icon(
