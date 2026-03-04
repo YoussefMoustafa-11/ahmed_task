@@ -2,6 +2,7 @@ import 'package:ahmed_task/Core/routing/app_routes.dart';
 import 'package:ahmed_task/feature/auth/presentation/view/register/view/register.dart';
 import 'package:ahmed_task/feature/comments/presentation/view/comments_view.dart';
 import 'package:ahmed_task/feature/create_post/presentation/view/create_post.dart';
+import 'package:ahmed_task/feature/edit_profile/presentation/view/edit_prefile_view.dart';
 import 'package:ahmed_task/feature/home/presentation/view/home_view.dart';
 import 'package:ahmed_task/feature/profile/presentation/view/profile_view.dart';
 import 'package:ahmed_task/feature/splash/presentation/view/splash_view.dart';
@@ -10,7 +11,7 @@ import 'package:go_router/go_router.dart';
 
 class RouterGenerationConfig {
   static final goRouter = GoRouter(
-    initialLocation: AppRoutes.profileView,
+    initialLocation: AppRoutes.editProfileView,
     routes: [
       GoRoute(
         path: AppRoutes.splashView,
@@ -52,6 +53,11 @@ class RouterGenerationConfig {
         path: AppRoutes.profileView,
         name: AppRoutes.profileView,
         builder: (context, state) => const ProfileView(),
+      ),
+      GoRoute(
+        path: AppRoutes.editProfileView,
+        name: AppRoutes.editProfileView,
+        builder: (context, state) => const EditProfileView(),
       ),
     ],
   );

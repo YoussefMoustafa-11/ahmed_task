@@ -97,6 +97,7 @@ class _RegisterViewState extends State<RegisterView> {
                 width: double.infinity,
                 onPressed: () {
                   // TODO: Implement sign up logic
+                  GoRouter.of(context).pushNamed(AppRoutes.homeView);
                 },
                 buttonText: "Sign Up",
                 backgroundColor: AppColors.primary,

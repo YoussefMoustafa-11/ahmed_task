@@ -74,8 +74,8 @@ class _HomeViewState extends State<HomeView> {
       'content':
           'New workspace setup is finally complete! Minimalist vibes only. ✨',
       'images': [
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuB8701234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890',
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuB8701234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+        'https://lh3.googleusercontent.com/aida-public/AB6AXuA6ZaU8mdL1h1q4dM6h4wF_i6JYb6hw4sTofK13MkPrwwD52R2aUzzKghTodcUStZS3eb3zt0R5OEQtb9C51KaNXNT8G24_wFMMtx4pIJEV1N4tkf1g3wPaRu9WZtRkMNAJzOSJPVyXUyzf9q0TLtYqm_LjI2kFNFE2RzYv6tLCCrLf6vhEm2ITGps6XVGK7vG-4pu_roLrGXZwe4IBRzvECOIRBPlma9zDnlBkN-DBNdGfeTXT7_sahC_THPJ-TRg_R8qOXmhmLW4',
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuDeITDNMYXn98esZz6bfYrUeoiqUS3gKjPPXxRn_b5FQohmOWul6u1gKjG386zvwEWqfEtTRlLmbtbifwMqU28f0IEzi6tBB_PpA-BQ3bNqricws2fiXQZHUQpVp3qwRAH-NfC9dCr_fc0G2p99GBNvbc_JG6THZ9g7aGyUrjCeRTH-4FST48FeWkycCV8mEtaMXS1pgLvlVr58cjrFaZcHhRszzjguqis486JvBWonNXk668qOAiZ8hDB-FkPoFWes3mpw5WSVTKM",
       ],
       'likesCount': 856,
       'commentsCount': 12,

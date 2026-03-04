@@ -1,5 +1,4 @@
 import 'package:ahmed_task/Core/routing/router_generation_config.dart';
-
 import 'package:flutter/material.dart';
 
 void main() {
