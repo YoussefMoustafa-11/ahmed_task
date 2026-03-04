@@ -1,4 +1,6 @@
+import 'package:ahmed_task/Core/routing/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'widgets/header_section.dart';
 import 'widgets/icon_section.dart';
 import 'widgets/title_section.dart';
@@ -19,7 +21,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   bool _isEmailMethod = false;
   late final TextEditingController _emailController;
   late final TextEditingController _phoneController;
-  String _selectedCountryCode =  '+20';
+  String _selectedCountryCode = '+20';
 
   @override
   void initState() {
@@ -46,8 +48,6 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
       _selectedCountryCode = code;
     });
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -84,11 +84,13 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                       const SizedBox(height: 60),
                       ActionButtons(
                         isEmailMethod: _isEmailMethod,
-                        onSendLink: () {},
+                        onSendLink: () {
+                          GoRouter.of(context).push(AppRoutes.verificationView);
+                        },
                         onSendOTP: () {},
                       ),
                       const SizedBox(height: 30),
-                      BackToLoginLink(onTap:() => Navigator.pop(context),),
+                      BackToLoginLink(onTap: () => Navigator.pop(context)),
                       const SizedBox(height: 8),
                     ],
                   ),

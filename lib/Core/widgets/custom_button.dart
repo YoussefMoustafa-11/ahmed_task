@@ -3,16 +3,30 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   final double? width;
-  
+
   final double? height;
-  
+
   final VoidCallback? onPressed;
-  
+
   final Color? backgroundColor;
-  
+
+  final Color? foregroundColor;
+
   final double borderRadius;
-  
+
   final String buttonText;
+
+  final IconData? icon;
+
+  final double? iconSize;
+
+  final double? iconSpacing;
+
+  final double elevation;
+
+  final Color? shadowColor;
+
+  final TextStyle? textStyle;
 
   const CustomButton({
     super.key,
@@ -20,8 +34,15 @@ class CustomButton extends StatelessWidget {
     this.height,
     required this.onPressed,
     this.backgroundColor,
+    this.foregroundColor,
     this.borderRadius = 12,
     required this.buttonText,
+    this.icon,
+    this.iconSize,
+    this.iconSpacing = 8,
+    this.elevation = 0,
+    this.shadowColor,
+    this.textStyle,
   });
 
   @override
@@ -32,13 +53,24 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor:backgroundColor,
+          backgroundColor: backgroundColor,
+          foregroundColor: foregroundColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
-          elevation: 0,
+          elevation: elevation,
+          shadowColor: shadowColor,
         ),
-        child:  Text(buttonText, style: AppTextStyle.buttonText),
+        child: icon != null
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(buttonText, style: textStyle ?? AppTextStyle.buttonText),
+                  SizedBox(width: iconSpacing),
+                  Icon(icon, size: iconSize),
+                ],
+              )
+            : Text(buttonText, style: textStyle ?? AppTextStyle.buttonText),
       ),
     );
   }

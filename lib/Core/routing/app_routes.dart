@@ -8,4 +8,5 @@ class AppRoutes {
   static const String profileView = "/profileView";
   static const String editProfileView = "/editProfileView";
   static const String forgotPasswordView = "/forgotPasswordView";
+  static const String verificationView = "/verificationView";
 }
