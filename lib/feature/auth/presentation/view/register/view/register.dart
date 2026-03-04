@@ -22,11 +22,17 @@ class RegisterView extends StatefulWidget {
 class _RegisterViewState extends State<RegisterView> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  final _fullNameController = TextEditingController();
+  final _phoneController = TextEditingController();
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    _fullNameController.dispose();
+    _phoneController.dispose();
     super.dispose();
   }
 
@@ -61,11 +67,18 @@ class _RegisterViewState extends State<RegisterView> {
               const Text('Full Name', style: AppTextStyle.labelMedium),
               const SizedBox(height: 8),
               CustomTextField(
-                controller: _emailController,
+                controller: _fullNameController,
                 hintText: "Enter your full name",
                 prefixIcon: Icons.person_outline,
               ),
               const SizedBox(height: 8),
+              const Text('Phone Number', style: AppTextStyle.labelMedium),
+              const SizedBox(height: 8),
+              CustomTextField(
+                controller: _phoneController,
+                hintText: "Enter your phone number",
+                prefixIcon: Icons.phone_outlined,
+              ),
               const Text('Email Address', style: AppTextStyle.labelMedium),
               const SizedBox(height: 8),
               CustomTextField(
@@ -78,6 +91,14 @@ class _RegisterViewState extends State<RegisterView> {
               const SizedBox(height: 8),
               CustomTextField(
                 controller: _passwordController,
+                isPassword: true,
+                hintText: '•' * 8,
+                prefixIcon: Icons.lock_outline,
+              ),
+              const Text('Confirm Password', style: AppTextStyle.labelMedium),
+              const SizedBox(height: 8),
+              CustomTextField(
+                controller: _confirmPasswordController,
                 isPassword: true,
                 hintText: '•' * 8,
                 prefixIcon: Icons.lock_outline,
