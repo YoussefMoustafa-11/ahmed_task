@@ -36,12 +36,7 @@ class _LoginViewState extends State<LoginView> {
       appBar: AppBar(
         backgroundColor: AppColors.background,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Color(0xFF000000)),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+      
         title: const Text('Login', style: AppTextStyle.heading2),
         centerTitle: true,
       ),
