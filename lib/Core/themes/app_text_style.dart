@@ -63,4 +63,6 @@ class AppTextStyle {
     color: AppColors.placeholderColor,
     height: 1.5,
   );
+
+  static get headingLarge => null;
 }

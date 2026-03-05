@@ -1,5 +1,7 @@
+import 'package:ahmed_task/Core/routing/app_routes.dart';
 import 'package:ahmed_task/Core/widgets/custom_button.dart';
 import 'package:ahmed_task/feature/reset_password_flow/presentation/view/forgot_password/widgets/header_section.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:ahmed_task/feature/reset_password_flow/presentation/view/verification/widgets/resend_section.dart';
 import 'package:ahmed_task/feature/reset_password_flow/presentation/view/verification/widgets/verification_content_section.dart';
@@ -71,7 +73,7 @@ class VerificationView extends StatelessWidget {
                               width: double.infinity,
                               height: 56,
                               onPressed: () {
-                                // Handle verify action
+                                GoRouter.of(context).pushNamed(AppRoutes.createNewPasswordView);
                               },
                               backgroundColor: const Color(0xFF2B8CEE),
                               foregroundColor: Colors.white,

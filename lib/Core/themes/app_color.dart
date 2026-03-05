@@ -13,4 +13,6 @@ class AppColors {
   static const Color headingColor = Color(0xFF0F172A);
   static const Color labelColor = Color(0xFF334155);
   static const Color placeholderColor = Color(0xFFCBD5E1);
+
+  static Color? black = Color(0xFF000000);
 }

@@ -2,9 +2,10 @@ import 'package:ahmed_task/Core/routing/app_routes.dart';
 import 'package:ahmed_task/feature/auth/presentation/view/register/view/register.dart';
 import 'package:ahmed_task/feature/comments/presentation/view/comments_view.dart';
 import 'package:ahmed_task/feature/create_post/presentation/view/create_post.dart';
-import 'package:ahmed_task/feature/edit_profile/presentation/view/edit_prefile_view.dart';
+import 'package:ahmed_task/feature/edit_profile/presentation/view/edit_profile_view.dart';
 import 'package:ahmed_task/feature/home/presentation/view/home_view.dart';
 import 'package:ahmed_task/feature/profile/presentation/view/profile_view.dart';
+import 'package:ahmed_task/feature/reset_password_flow/presentation/view/create_new_password/create_new_password.dart';
 import 'package:ahmed_task/feature/reset_password_flow/presentation/view/forgot_password/forgot_password_view.dart';
 import 'package:ahmed_task/feature/reset_password_flow/presentation/view/verification/verification_view.dart';
 import 'package:ahmed_task/feature/splash/presentation/view/splash_view.dart';
@@ -66,10 +67,15 @@ class RouterGenerationConfig {
         name: AppRoutes.forgotPasswordView,
         builder: (context, state) => const ForgotPasswordView(),
       ),
-      GoRoute( 
+      GoRoute(
         path: AppRoutes.verificationView,
         name: AppRoutes.verificationView,
         builder: (context, state) => const VerificationView(),
+      ),
+      GoRoute(
+        path: AppRoutes.createNewPasswordView,
+        name: AppRoutes.createNewPasswordView,
+        builder: (context, state) => const CreateNewPasswordView(),
       ),
     ],
   );
