@@ -1,8 +1,8 @@
 import 'package:ahmed_task/Core/widgets/custom_button.dart';
-import 'package:ahmed_task/feature/reset_password/presentation/view/forgot_password/widgets/header_section.dart';
+import 'package:ahmed_task/feature/reset_password_flow/presentation/view/forgot_password/widgets/header_section.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:ahmed_task/feature/reset_password/presentation/view/verification/widgets/resend_section.dart';
-import 'package:ahmed_task/feature/reset_password/presentation/view/verification/widgets/verification_content_section.dart';
+import 'package:ahmed_task/feature/reset_password_flow/presentation/view/verification/widgets/resend_section.dart';
+import 'package:ahmed_task/feature/reset_password_flow/presentation/view/verification/widgets/verification_content_section.dart';
 import 'package:flutter/material.dart';
 
 class VerificationView extends StatelessWidget {
@@ -67,29 +67,26 @@ class VerificationView extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 24),
-                           CustomButton(
-      width: double.infinity,
-      height: 56,
-      onPressed: () {
-        // Handle verify action
-      },
-      backgroundColor: const Color(0xFF2B8CEE),
-      foregroundColor: Colors.white,
-      borderRadius: 16,
-      buttonText: 'Verify',
-      icon: Icons.verified_user_rounded,
-      iconSize: 22,
-      iconSpacing: 8,
-      elevation: 8,
-      shadowColor: const Color(0x402B8CEE),
-    )
-      ,
+                            CustomButton(
+                              width: double.infinity,
+                              height: 56,
+                              onPressed: () {
+                                // Handle verify action
+                              },
+                              backgroundColor: const Color(0xFF2B8CEE),
+                              foregroundColor: Colors.white,
+                              borderRadius: 16,
+                              buttonText: 'Verify',
+                              icon: Icons.verified_user_rounded,
+                              iconSize: 22,
+                              iconSpacing: 8,
+                              elevation: 8,
+                              shadowColor: const Color(0x402B8CEE),
+                            ),
                             SizedBox(height: 16),
                             ResendSection(
                               remainingSeconds: 30,
-                              onResend: () {
-                                // Handle resend action
-                              },
+                              onResend: () {},
                             ),
                           ],
                         ),

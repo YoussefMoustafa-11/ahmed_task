@@ -5,8 +5,8 @@ import 'package:ahmed_task/feature/create_post/presentation/view/create_post.dar
 import 'package:ahmed_task/feature/edit_profile/presentation/view/edit_prefile_view.dart';
 import 'package:ahmed_task/feature/home/presentation/view/home_view.dart';
 import 'package:ahmed_task/feature/profile/presentation/view/profile_view.dart';
-import 'package:ahmed_task/feature/reset_password/presentation/view/forgot_password/forgot_password_view.dart';
-import 'package:ahmed_task/feature/reset_password/presentation/view/verification/verification_view.dart';
+import 'package:ahmed_task/feature/reset_password_flow/presentation/view/forgot_password/forgot_password_view.dart';
+import 'package:ahmed_task/feature/reset_password_flow/presentation/view/verification/verification_view.dart';
 import 'package:ahmed_task/feature/splash/presentation/view/splash_view.dart';
 import 'package:ahmed_task/feature/auth/presentation/view/login/view/login_view.dart';
 import 'package:go_router/go_router.dart';
