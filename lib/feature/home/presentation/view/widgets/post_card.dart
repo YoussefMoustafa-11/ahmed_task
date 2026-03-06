@@ -1,3 +1,4 @@
+import 'package:ahmed_task/feature/share_bottom_sheet/presentation/view/share_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:ahmed_task/Core/themes/app_color.dart';
 import 'package:ahmed_task/Core/themes/app_text_style.dart';
@@ -151,7 +152,9 @@ class _PostCardState extends State<PostCard> {
 
                 // Share Button
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    ShareBottomSheet.show(context);
+                  },
                   child: const Icon(
                     Icons.send_outlined,
                     color: AppColors.greyText,
