@@ -64,5 +64,5 @@ class AppTextStyle {
     height: 1.5,
   );
 
-  static get headingLarge => null;
+  static Null get headingLarge => null;
 }

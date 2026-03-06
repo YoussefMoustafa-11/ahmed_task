@@ -1,6 +1,8 @@
+import 'package:ahmed_task/Core/routing/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:ahmed_task/Core/themes/app_color.dart';
 import 'package:ahmed_task/Core/themes/app_text_style.dart';
+import 'package:go_router/go_router.dart';
 
 class StoryItem extends StatelessWidget {
   final String imageUrl;
@@ -24,37 +26,42 @@ class StoryItem extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Container(
-                width: 72,
-                height: 72,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: hasStory
-                        ? const Color(0xFF2B8CEE)
-                        : AppColors.borderColor,
-                    width: 2,
-                  ),
-                ),
-                padding: const EdgeInsets.all(2),
+              GestureDetector(
+                onTap: () {
+                  GoRouter.of(context).pushNamed(AppRoutes.storyView);
+                },
                 child: Container(
+                  width: 72,
+                  height: 72,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColors.white,
-                    image: imageUrl.isNotEmpty
-                        ? DecorationImage(
-                            image: NetworkImage(imageUrl),
-                            fit: BoxFit.cover,
+                    border: Border.all(
+                      color: hasStory
+                          ? const Color(0xFF2B8CEE)
+                          : AppColors.borderColor,
+                      width: 2,
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(2),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.white,
+                      image: imageUrl.isNotEmpty
+                          ? DecorationImage(
+                              image: NetworkImage(imageUrl),
+                              fit: BoxFit.cover,
+                            )
+                          : null,
+                    ),
+                    child: imageUrl.isEmpty
+                        ? const Icon(
+                            Icons.person,
+                            size: 36,
+                            color: AppColors.greyText,
                           )
                         : null,
                   ),
-                  child: imageUrl.isEmpty
-                      ? const Icon(
-                          Icons.person,
-                          size: 36,
-                          color: AppColors.greyText,
-                        )
-                      : null,
                 ),
               ),
               if (isAddStory)

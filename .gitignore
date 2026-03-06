@@ -43,3 +43,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+Ai analysis/00_START_HERE.md
+Ai analysis/DUPLICATION_ANALYSIS_REPORT.md
+Ai analysis/METRICS_PROJECTIONS.md
+Ai analysis/PHASE_1_COMPLETION_SUMMARY.md
+Ai analysis/QUICK_REFERENCE.md
+Ai analysis/REFACTOR_STRATEGY.md
+Ai analysis/RISK_ASSESSMENT.md
