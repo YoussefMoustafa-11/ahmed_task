@@ -10,6 +10,7 @@ import 'package:ahmed_task/feature/reset_password_flow/presentation/view/forgot_
 import 'package:ahmed_task/feature/reset_password_flow/presentation/view/verification/verification_view.dart';
 import 'package:ahmed_task/feature/splash/presentation/view/splash_view.dart';
 import 'package:ahmed_task/feature/auth/presentation/view/login/view/login_view.dart';
+import 'package:ahmed_task/feature/story/presentation/view/add_story/add_story_view.dart';
 import 'package:ahmed_task/feature/story/presentation/view/story_view/story_view.dart';
 import 'package:go_router/go_router.dart';
 
@@ -95,6 +96,11 @@ class RouterGenerationConfig {
           ),
         ),
       ),
+      GoRoute(
+        path:  AppRoutes.addStory,
+        name: AppRoutes.addStory,
+        builder: (context, state) => const AddStoryView(),
+      )
     ],
   );
 }

@@ -68,18 +68,23 @@ class StoryItem extends StatelessWidget {
                 Positioned(
                   right: 0,
                   bottom: 0,
-                  child: Container(
-                    width: 24,
-                    height: 24,
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.white, width: 2),
-                    ),
-                    child: const Icon(
-                      Icons.add,
-                      size: 14,
-                      color: AppColors.white,
+                  child: GestureDetector(
+                    onTap: () {
+                      GoRouter.of(context).pushNamed(AppRoutes.addStory);
+                    },
+                    child: Container(
+                      width: 24,
+                      height: 24,
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: AppColors.white, width: 2),
+                      ),
+                      child: const Icon(
+                        Icons.add,
+                        size: 14,
+                        color: AppColors.white,
+                      ),
                     ),
                   ),
                 ),

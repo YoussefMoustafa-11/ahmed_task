@@ -11,5 +11,5 @@ class AppRoutes {
   static const String verificationView = "/verificationView";
   static const String createNewPasswordView = "/createNewPasswordView";
   static const String storyView = "/storyView";
- 
+  static const String addStory = "/addStory";
 }
