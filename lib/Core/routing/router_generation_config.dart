@@ -42,7 +42,7 @@ class RouterGenerationConfig {
         builder: (context, state) {
           final extra = state.extra as Map<String, dynamic>?;
           return CommentsView(
-            postTitle: extra?['postTitle'] as String? ?? '',
+            
             commentsCount: extra?['commentsCount'] as int? ?? 0,
           );
         },
