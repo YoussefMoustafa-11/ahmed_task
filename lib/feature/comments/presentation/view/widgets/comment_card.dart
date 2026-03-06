@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ahmed_task/Core/themes/app_text_style.dart';
-import 'package:ahmed_task/feature/comments/presentation/view/widgets/user_avatar.dart';
-import 'package:ahmed_task/feature/comments/presentation/view/widgets/comment_likes_button.dart';
+import 'package:ahmed_task/Core/widgets/user_avatar.dart';
+import 'package:ahmed_task/Core/widgets/like_button.dart';
 
 class CommentCard extends StatelessWidget {
   final String name;
@@ -30,10 +30,7 @@ class CommentCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey[200]!, width: 0.5),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 2,
-          ),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 2),
         ],
       ),
       child: Row(
@@ -76,10 +73,7 @@ class CommentCard extends StatelessWidget {
                 const SizedBox(height: 12),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: CommentLikesButton(
-                    initialLikes: likes,
-                    isLiked: isLiked,
-                  ),
+                  child: LikeButton(initialLikes: likes, isLiked: isLiked),
                 ),
               ],
             ),

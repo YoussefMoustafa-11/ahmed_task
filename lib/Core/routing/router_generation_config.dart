@@ -14,7 +14,7 @@ import 'package:go_router/go_router.dart';
 
 class RouterGenerationConfig {
   static final goRouter = GoRouter(
-    initialLocation: AppRoutes.logInView,
+    initialLocation: AppRoutes.homeView,
     routes: [
       GoRoute(
         path: AppRoutes.splashView,
@@ -42,7 +42,6 @@ class RouterGenerationConfig {
         builder: (context, state) {
           final extra = state.extra as Map<String, dynamic>?;
           return CommentsView(
-            
             commentsCount: extra?['commentsCount'] as int? ?? 0,
           );
         },

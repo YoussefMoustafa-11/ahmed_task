@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:ahmed_task/Core/themes/app_color.dart';
 import 'package:ahmed_task/Core/themes/app_text_style.dart';
 
-class CommentLikesButton extends StatefulWidget {
+class LikeButton extends StatefulWidget {
   final int initialLikes;
   final bool isLiked;
   final VoidCallback? onLikeToggle;
 
-  const CommentLikesButton({
+  const LikeButton({
     super.key,
     required this.initialLikes,
     this.isLiked = false,
@@ -15,10 +15,10 @@ class CommentLikesButton extends StatefulWidget {
   });
 
   @override
-  State<CommentLikesButton> createState() => _CommentLikesButtonState();
+  State<LikeButton> createState() => _LikeButtonState();
 }
 
-class _CommentLikesButtonState extends State<CommentLikesButton> {
+class _LikeButtonState extends State<LikeButton> {
   late bool _isLiked;
   late int _likeCount;
 
@@ -30,7 +30,7 @@ class _CommentLikesButtonState extends State<CommentLikesButton> {
   }
 
   @override
-  void didUpdateWidget(covariant CommentLikesButton oldWidget) {
+  void didUpdateWidget(covariant LikeButton oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.isLiked != widget.isLiked ||
         oldWidget.initialLikes != widget.initialLikes) {

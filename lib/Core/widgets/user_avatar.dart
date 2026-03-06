@@ -4,11 +4,7 @@ class UserAvatar extends StatelessWidget {
   final String imageUrl;
   final double size;
 
-  const UserAvatar({
-    super.key,
-    required this.imageUrl,
-    this.size = 40,
-  });
+  const UserAvatar({super.key, required this.imageUrl, this.size = 40});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +24,11 @@ class UserAvatar extends StatelessWidget {
             if (wasSynchronouslyLoaded || frame != null) return child;
             return Container(
               color: Colors.grey[200],
-              child: Icon(Icons.person, size: size * 0.5, color: Colors.grey[400]),
+              child: Icon(
+                Icons.person,
+                size: size * 0.5,
+                color: Colors.grey[400],
+              ),
             );
           },
           errorBuilder: (context, error, stackTrace) {

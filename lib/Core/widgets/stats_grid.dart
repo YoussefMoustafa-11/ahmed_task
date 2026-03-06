@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../../Core/themes/app_color.dart';
+import 'package:ahmed_task/Core/themes/app_color.dart';
 
 class StatsGrid extends StatelessWidget {
   final List<StatItem> stats;

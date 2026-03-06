@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ahmed_task/Core/themes/app_color.dart';
 import 'package:ahmed_task/Core/themes/app_text_style.dart';
-import 'package:ahmed_task/feature/comments/presentation/view/widgets/user_avatar.dart';
+import 'package:ahmed_task/Core/widgets/user_avatar.dart';
 
 class BottomSheetCommentCard extends StatelessWidget {
   final String name;
