@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class StoryInteractionButtons extends StatefulWidget {
+class StoryInteractionButtons extends StatelessWidget {
   final VoidCallback? onLikePressed;
   final VoidCallback? onSendPressed;
   final bool isLiked;
@@ -13,34 +13,15 @@ class StoryInteractionButtons extends StatefulWidget {
   });
 
   @override
-  State<StoryInteractionButtons> createState() =>
-      _StoryInteractionButtonsState();
-}
-
-class _StoryInteractionButtonsState extends State<StoryInteractionButtons> {
-  late bool _isLiked;
-
-  @override
-  void initState() {
-    super.initState();
-    _isLiked = widget.isLiked;
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         // Like Button
         IconButton(
-          onPressed: () {
-            setState(() {
-              _isLiked = !_isLiked;
-            });
-            widget.onLikePressed?.call();
-          },
+          onPressed: onLikePressed,
           icon: Icon(
-            _isLiked ? Icons.favorite : Icons.favorite_outline,
-            color: _isLiked ? Colors.red : Colors.white,
+            isLiked ? Icons.favorite : Icons.favorite_outline,
+            color: isLiked ? Colors.red : Colors.white,
             size: 28,
           ),
           constraints: const BoxConstraints(),
@@ -49,7 +30,7 @@ class _StoryInteractionButtonsState extends State<StoryInteractionButtons> {
         const SizedBox(width: 16),
         // Send Button
         IconButton(
-          onPressed: widget.onSendPressed,
+          onPressed: onSendPressed,
           icon: const Icon(Icons.send, color: Colors.white, size: 28),
           constraints: const BoxConstraints(),
           padding: const EdgeInsets.all(8),

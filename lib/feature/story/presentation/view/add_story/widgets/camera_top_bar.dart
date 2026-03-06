@@ -2,7 +2,18 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
 class CameraTopBar extends StatelessWidget {
-  const CameraTopBar({super.key});
+  final bool isFlashOn;
+  final VoidCallback? onFlashToggle;
+  final bool hasCapturedImage;
+  final VoidCallback? onClearImage;
+
+  const CameraTopBar({
+    super.key,
+    this.isFlashOn = false,
+    this.onFlashToggle,
+    this.hasCapturedImage = false,
+    this.onClearImage,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,10 +22,16 @@ class CameraTopBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Close Button
+          // Close / Clear Button
           _IconButton(
-            icon: Icons.close,
-            onPressed: () => Navigator.pop(context),
+            icon: hasCapturedImage ? Icons.arrow_back : Icons.close,
+            onPressed: () {
+              if (hasCapturedImage) {
+                onClearImage?.call();
+              } else {
+                Navigator.pop(context);
+              }
+            },
           ),
 
           // Tools Bar (Flash, Mood, Text, Brush)
@@ -32,10 +49,47 @@ class CameraTopBar extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    _ToolButton(icon: Icons.flash_on, onPressed: () {}),
-                    _ToolButton(icon: Icons.emoji_emotions, onPressed: () {}),
-                    _ToolButton(icon: Icons.text_fields, onPressed: () {}),
-                    _ToolButton(icon: Icons.brush, onPressed: () {}),
+                    _ToolButton(
+                      icon: isFlashOn ? Icons.flash_on : Icons.flash_off,
+                      isActive: isFlashOn,
+                      onPressed: () => onFlashToggle?.call(),
+                    ),
+                    _ToolButton(
+                      icon: Icons.emoji_emotions,
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Stickers coming soon'),
+                            duration: Duration(seconds: 1),
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
+                      },
+                    ),
+                    _ToolButton(
+                      icon: Icons.text_fields,
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Text overlay coming soon'),
+                            duration: Duration(seconds: 1),
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
+                      },
+                    ),
+                    _ToolButton(
+                      icon: Icons.brush,
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Drawing tool coming soon'),
+                            duration: Duration(seconds: 1),
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -43,7 +97,49 @@ class CameraTopBar extends StatelessWidget {
           ),
 
           // Settings Button
-          _IconButton(icon: Icons.settings, onPressed: () {}),
+          _IconButton(
+            icon: Icons.settings,
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: Colors.grey[900],
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                ),
+                builder: (sheetContext) => SafeArea(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ListTile(
+                        leading: const Icon(Icons.hd, color: Colors.white),
+                        title: const Text(
+                          'Quality: High',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onTap: () => Navigator.pop(sheetContext),
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.timer, color: Colors.white),
+                        title: const Text(
+                          'Timer: Off',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onTap: () => Navigator.pop(sheetContext),
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.grid_on, color: Colors.white),
+                        title: const Text(
+                          'Grid: Off',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onTap: () => Navigator.pop(sheetContext),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
@@ -83,8 +179,13 @@ class _IconButton extends StatelessWidget {
 class _ToolButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback onPressed;
+  final bool isActive;
 
-  const _ToolButton({required this.icon, required this.onPressed});
+  const _ToolButton({
+    required this.icon,
+    required this.onPressed,
+    this.isActive = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -93,8 +194,15 @@ class _ToolButton extends StatelessWidget {
       child: Container(
         width: 36,
         height: 36,
-        decoration: BoxDecoration(shape: BoxShape.circle),
-        child: Icon(icon, color: Color(0xFFF1F5F9), size: 18),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: isActive ? Colors.white.withOpacity(0.2) : Colors.transparent,
+        ),
+        child: Icon(
+          icon,
+          color: isActive ? Colors.amber : Color(0xFFF1F5F9),
+          size: 18,
+        ),
       ),
     );
   }

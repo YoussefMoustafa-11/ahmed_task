@@ -2,7 +2,10 @@ import 'package:ahmed_task/Core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class QuickShareBar extends StatelessWidget {
-  const QuickShareBar({super.key});
+  final VoidCallback? onShare;
+  final bool hasImage;
+
+  const QuickShareBar({super.key, this.onShare, this.hasImage = false});
 
   @override
   Widget build(BuildContext context) {
@@ -104,10 +107,10 @@ class QuickShareBar extends StatelessWidget {
 
           // Share Button
           CustomButton(
-            onPressed: () {
-              // TODO: Share story
-            },
-            backgroundColor: primaryColor,
+            onPressed: onShare,
+            backgroundColor: hasImage
+                ? primaryColor
+                : primaryColor.withOpacity(0.5),
             foregroundColor: Colors.white,
             borderRadius: 24,
             buttonText: 'Share',

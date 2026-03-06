@@ -37,31 +37,182 @@ class StoryView extends StatefulWidget {
   State<StoryView> createState() => _StoryViewState();
 }
 
-class _StoryViewState extends State<StoryView> {
+class _StoryViewState extends State<StoryView>
+    with SingleTickerProviderStateMixin {
   late TextEditingController _replyController;
-  late List<double> _progressValues;
-  late int _currentProgress;
+  late AnimationController _progressController;
+  late int _currentStoryIndex;
   bool _isLiked = false;
+
+  static const _storyDuration = Duration(seconds: 5);
 
   @override
   void initState() {
     super.initState();
     _replyController = TextEditingController();
-    _progressValues = List.generate(
-      widget.storyCount,
-      (index) => index < widget.currentStoryIndex
-          ? 1.0
-          : index == widget.currentStoryIndex
-          ? 0.5
-          : 0.0,
-    );
-    _currentProgress = widget.currentStoryIndex;
+    _currentStoryIndex = widget.currentStoryIndex;
+
+    _progressController = AnimationController(
+      vsync: this,
+      duration: _storyDuration,
+    )..addStatusListener(_onProgressComplete);
+
+    _progressController.forward();
+  }
+
+  void _onProgressComplete(AnimationStatus status) {
+    if (status == AnimationStatus.completed) {
+      _goToNextStory();
+    }
   }
 
   @override
   void dispose() {
     _replyController.dispose();
+    _progressController.removeStatusListener(_onProgressComplete);
+    _progressController.dispose();
     super.dispose();
+  }
+
+  void _goToNextStory() {
+    if (_currentStoryIndex < widget.storyCount - 1) {
+      setState(() => _currentStoryIndex++);
+      _progressController.forward(from: 0);
+    } else {
+      if (mounted) Navigator.pop(context);
+    }
+  }
+
+  void _goToPreviousStory() {
+    if (_currentStoryIndex > 0) {
+      setState(() => _currentStoryIndex--);
+    }
+    _progressController.forward(from: 0);
+  }
+
+  void _pauseStory() {
+    _progressController.stop();
+  }
+
+  void _resumeStory() {
+    if (mounted) _progressController.forward();
+  }
+
+  void _onTapStory(TapUpDetails details) {
+    final tapX = details.globalPosition.dx;
+    final screenWidth = MediaQuery.of(context).size.width;
+    if (tapX < screenWidth / 3) {
+      _goToPreviousStory();
+    } else {
+      _goToNextStory();
+    }
+  }
+
+  void _onSendReply() {
+    final text = _replyController.text.trim();
+    if (text.isEmpty) return;
+    _replyController.clear();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Reply sent: $text'),
+        duration: const Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
+  void _onMorePressed() {
+    _pauseStory();
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.grey[900],
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (sheetContext) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.volume_off, color: Colors.white),
+              title: const Text('Mute', style: TextStyle(color: Colors.white)),
+              onTap: () {
+                Navigator.pop(sheetContext);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Story muted'),
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.report_outlined, color: Colors.white),
+              title: const Text(
+                'Report',
+                style: TextStyle(color: Colors.white),
+              ),
+              onTap: () {
+                Navigator.pop(sheetContext);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Story reported'),
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.share, color: Colors.white),
+              title: const Text('Share', style: TextStyle(color: Colors.white)),
+              onTap: () {
+                Navigator.pop(sheetContext);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Share link copied'),
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    ).whenComplete(() => _resumeStory());
+  }
+
+  void _onEmojiPressed() {
+    _pauseStory();
+    final emojis = ['❤️', '😂', '😮', '😢', '👏', '🔥', '🎉', '😍'];
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.grey[900],
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (sheetContext) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Wrap(
+            spacing: 20,
+            runSpacing: 20,
+            alignment: WrapAlignment.center,
+            children: emojis.map((emoji) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.pop(sheetContext);
+                  _replyController.text += emoji;
+                  _replyController.selection = TextSelection.fromPosition(
+                    TextPosition(offset: _replyController.text.length),
+                  );
+                },
+                child: Text(emoji, style: const TextStyle(fontSize: 32)),
+              );
+            }).toList(),
+          ),
+        ),
+      ),
+    ).whenComplete(() => _resumeStory());
   }
 
   @override
@@ -71,7 +222,7 @@ class _StoryViewState extends State<StoryView> {
         color: Colors.black,
         child: Stack(
           children: [
-            // Video Background Layer
+            // Image Background
             Positioned.fill(
               child: Image.network(
                 widget.storyModel.videoUrl,
@@ -105,10 +256,22 @@ class _StoryViewState extends State<StoryView> {
                     ),
                     child: Column(
                       children: [
-                        // Progress Bars
-                        StoryProgressBar(
-                          progress: _progressValues,
-                          currentIndex: _currentProgress,
+                        // Animated Progress Bars
+                        AnimatedBuilder(
+                          animation: _progressController,
+                          builder: (context, child) {
+                            return StoryProgressBar(
+                              progress: List.generate(
+                                widget.storyCount,
+                                (index) => index < _currentStoryIndex
+                                    ? 1.0
+                                    : index == _currentStoryIndex
+                                    ? _progressController.value
+                                    : 0.0,
+                              ),
+                              currentIndex: _currentStoryIndex,
+                            );
+                          },
                         ),
                         const SizedBox(height: 12),
                         // User Info Bar
@@ -116,28 +279,19 @@ class _StoryViewState extends State<StoryView> {
                           username: widget.storyModel.username,
                           timestamp: widget.storyModel.timestamp,
                           profileImageUrl: widget.storyModel.profileImageUrl,
-                          onMorePressed: () {},
-                          onClosePressed: () {
-                            // Handle close
-                            Navigator.pop(context);
-                          },
+                          onMorePressed: _onMorePressed,
+                          onClosePressed: () => Navigator.pop(context),
                         ),
                       ],
                     ),
                   ),
-                  // Spacer
+                  // Tap & Hold area for story navigation
                   Expanded(
                     child: GestureDetector(
-                      onTapDown: (details) {
-                        // Handle next/previous story
-                        final tapPosition = details.globalPosition.dx;
-                        final screenWidth = MediaQuery.of(context).size.width;
-                        if (tapPosition < screenWidth / 2) {
-                          // Previous story
-                        } else {
-                          // Next story
-                        }
-                      },
+                      behavior: HitTestBehavior.opaque,
+                      onTapUp: _onTapStory,
+                      onLongPressStart: (_) => _pauseStory(),
+                      onLongPressEnd: (_) => _resumeStory(),
                     ),
                   ),
                   // Bottom Section: Reply Input & Interaction Buttons
@@ -145,29 +299,24 @@ class _StoryViewState extends State<StoryView> {
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
                     ).copyWith(bottom: 40),
-                    child: Column(
+                    child: Row(
                       children: [
-                        Row(
-                          children: [
-                            // Reply Input
-                            Expanded(
-                              child: StoryReplyInput(
-                                controller: _replyController,
-                                onEmojiPressed: () {},
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            // Interaction Buttons
-                            StoryInteractionButtons(
-                              isLiked: _isLiked,
-                              onLikePressed: () {
-                                setState(() {
-                                  _isLiked = !_isLiked;
-                                });
-                              },
-                              onSendPressed: () {},
-                            ),
-                          ],
+                        // Reply Input
+                        Expanded(
+                          child: StoryReplyInput(
+                            controller: _replyController,
+                            onEmojiPressed: _onEmojiPressed,
+                            onSubmitted: (_) => _onSendReply(),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        // Interaction Buttons
+                        StoryInteractionButtons(
+                          isLiked: _isLiked,
+                          onLikePressed: () {
+                            setState(() => _isLiked = !_isLiked);
+                          },
+                          onSendPressed: _onSendReply,
                         ),
                       ],
                     ),

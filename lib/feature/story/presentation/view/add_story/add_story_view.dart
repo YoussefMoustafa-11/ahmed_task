@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'widgets/camera_top_bar.dart';
 import 'widgets/bottom_controls.dart';
 import 'widgets/quick_share_bar.dart';
@@ -11,6 +13,66 @@ class AddStoryView extends StatefulWidget {
 }
 
 class _AddStoryViewState extends State<AddStoryView> {
+  final ImagePicker _picker = ImagePicker();
+  XFile? _capturedImage;
+  bool _isFlashOn = false;
+  CameraDevice _cameraDevice = CameraDevice.rear;
+
+  Future<void> _pickFromGallery() async {
+    final image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null && mounted) {
+      setState(() => _capturedImage = image);
+    }
+  }
+
+  Future<void> _captureImage() async {
+    final image = await _picker.pickImage(
+      source: ImageSource.camera,
+      preferredCameraDevice: _cameraDevice,
+    );
+    if (image != null && mounted) {
+      setState(() => _capturedImage = image);
+    }
+  }
+
+  void _flipCamera() {
+    setState(() {
+      _cameraDevice = _cameraDevice == CameraDevice.rear
+          ? CameraDevice.front
+          : CameraDevice.rear;
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          _cameraDevice == CameraDevice.front ? 'Front camera' : 'Rear camera',
+        ),
+        duration: const Duration(seconds: 1),
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
+  void _toggleFlash() {
+    setState(() => _isFlashOn = !_isFlashOn);
+  }
+
+  void _clearImage() {
+    setState(() => _capturedImage = null);
+  }
+
+  void _shareStory() {
+    if (_capturedImage == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please capture or select an image first'),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+    Navigator.pop(context, _capturedImage!.path);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,26 +86,33 @@ class _AddStoryViewState extends State<AddStoryView> {
         ),
         child: Stack(
           children: [
-            // Camera Background with gradient overlay
+            // Background: captured image or placeholder
             Positioned.fill(
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      'https://lh3.googleusercontent.com/aida-public/AB6AXuB_jiyAcJY8-NO6PCTDJSRaVqaZrwypxbOmh3rhFEos1v5nQQzOhc1PUQZyfKKj-UNH2JvSyuuwKvwSHnmuFt7f6tsEQRhwRpefM_3FnGhu2hgBo2rXiF6BhJj064yUGcXEUCnZuQNMlqAWSc0VVsCKhHXpfH5uybSvD2Smq425OV1_OyAFNEWFU3o-uIqiLGIYEmIPNX-oD9JBQlauTJN3b4AJD4HnK8-SvRvVrDnrkKXLq5ySY5V4dmkDOHfTuuMOWXxul0a3wUQ',
+              child: _capturedImage != null
+                  ? Image.file(File(_capturedImage!.path), fit: BoxFit.cover)
+                  : Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            'https://lh3.googleusercontent.com/aida-public/AB6AXuB_jiyAcJY8-NO6PCTDJSRaVqaZrwypxbOmh3rhFEos1v5nQQzOhc1PUQZyfKKj-UNH2JvSyuuwKvwSHnmuFt7f6tsEQRhwRpefM_3FnGhu2hgBo2rXiF6BhJj064yUGcXEUCnZuQNMlqAWSc0VVsCKhHXpfH5uybSvD2Smq425OV1_OyAFNEWFU3o-uIqiLGIYEmIPNX-oD9JBQlauTJN3b4AJD4HnK8-SvRvVrDnrkKXLq5ySY5V4dmkDOHfTuuMOWXxul0a3wUQ',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Container(color: Colors.black.withOpacity(0.4)),
                     ),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Container(color: Colors.black.withOpacity(0.4)),
-              ),
             ),
 
             // Main Content
             Column(
               children: [
                 // Top App Bar with Tools
-                CameraTopBar(),
+                CameraTopBar(
+                  isFlashOn: _isFlashOn,
+                  onFlashToggle: _toggleFlash,
+                  hasCapturedImage: _capturedImage != null,
+                  onClearImage: _clearImage,
+                ),
 
                 // Spacer for Camera View
                 Expanded(child: SizedBox()),
@@ -60,10 +129,17 @@ class _AddStoryViewState extends State<AddStoryView> {
                     spacing: 32,
                     children: [
                       // Camera Controls (Gallery, Capture, Flip)
-                      BottomControls(),
+                      BottomControls(
+                        onGalleryPick: _pickFromGallery,
+                        onCapture: _captureImage,
+                        onFlipCamera: _flipCamera,
+                      ),
 
                       // Quick Share Bar
-                      QuickShareBar(),
+                      QuickShareBar(
+                        onShare: _shareStory,
+                        hasImage: _capturedImage != null,
+                      ),
                     ],
                   ),
                 ),

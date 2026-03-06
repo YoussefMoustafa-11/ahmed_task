@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 class BottomControls extends StatelessWidget {
-  const BottomControls({super.key});
+  final VoidCallback? onGalleryPick;
+  final VoidCallback? onCapture;
+  final VoidCallback? onFlipCamera;
+
+  const BottomControls({
+    super.key,
+    this.onGalleryPick,
+    this.onCapture,
+    this.onFlipCamera,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -9,27 +18,26 @@ class BottomControls extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         // Gallery Picker
-        _GalleryPicker(),
+        _GalleryPicker(onTap: onGalleryPick),
 
         // Capture Button
-        _CaptureButton(),
+        _CaptureButton(onTap: onCapture),
 
         // Camera Flip Button
-        _CameraFlipButton(),
+        _CameraFlipButton(onTap: onFlipCamera),
       ],
     );
   }
 }
 
 class _GalleryPicker extends StatelessWidget {
-  const _GalleryPicker();
+  final VoidCallback? onTap;
+  const _GalleryPicker({this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // TODO: Open gallery picker
-      },
+      onTap: onTap,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         spacing: 4,
@@ -45,12 +53,10 @@ class _GalleryPicker extends StatelessWidget {
                 BoxShadow(color: Colors.black.withOpacity(0.3), blurRadius: 8),
               ],
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                'https://lh3.googleusercontent.com/aida-public/AB6AXuCjDdBm4oravlOxRBsnsZO_CEIsGvb2DDUKsJfBv5xgMHF0eSaucZrvrACi5cEb3AzE9HmiYryoiqZ0z4cs5TbV0-hdUWyQOts26KuNcoeqWkS2K8cPVFH48JGePBYpc1WuvRaaZ2k_GDazTha-IsNNI9ZkcC8DlE333JEFNfXXtlgVFEFxsxdWiIbNdLMhEG6DXYw_nTYit_Tcvjj7SVckwGI9f3Uny7kqVH92MLBMSjaAwJ7PyqCOI9PXxDigD1EyvFlW3qQ4Xw8',
-                fit: BoxFit.cover,
-              ),
+            child: const Icon(
+              Icons.photo_library,
+              color: Colors.white,
+              size: 24,
             ),
           ),
         ],
@@ -59,20 +65,14 @@ class _GalleryPicker extends StatelessWidget {
   }
 }
 
-class _CaptureButton extends StatefulWidget {
-  const _CaptureButton();
+class _CaptureButton extends StatelessWidget {
+  final VoidCallback? onTap;
+  const _CaptureButton({this.onTap});
 
-  @override
-  State<_CaptureButton> createState() => _CaptureButtonState();
-}
-
-class _CaptureButtonState extends State<_CaptureButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // TODO: Capture image/video
-      },
+      onTap: onTap,
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -108,15 +108,6 @@ class _CaptureButtonState extends State<_CaptureButton> {
                 ),
               ],
             ),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  // TODO: Capture image/video
-                },
-                customBorder: const CircleBorder(),
-              ),
-            ),
           ),
         ],
       ),
@@ -125,14 +116,13 @@ class _CaptureButtonState extends State<_CaptureButton> {
 }
 
 class _CameraFlipButton extends StatelessWidget {
-  const _CameraFlipButton();
+  final VoidCallback? onTap;
+  const _CameraFlipButton({this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // TODO: Flip camera
-      },
+      onTap: onTap,
       child: Container(
         width: 48,
         height: 48,

@@ -6,6 +6,7 @@ class StoryReplyInput extends StatefulWidget {
   final String? hintText;
   final VoidCallback? onEmojiPressed;
   final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
 
   const StoryReplyInput({
     super.key,
@@ -13,6 +14,7 @@ class StoryReplyInput extends StatefulWidget {
     this.hintText = 'Send a message...',
     this.onEmojiPressed,
     this.onChanged,
+    this.onSubmitted,
   });
 
   @override
@@ -36,6 +38,8 @@ class _StoryReplyInputState extends State<StoryReplyInput> {
             child: TextField(
               controller: widget.controller,
               onChanged: widget.onChanged,
+              onSubmitted: widget.onSubmitted,
+              textInputAction: TextInputAction.send,
               style: AppTextStyle.inputText.copyWith(
                 color: Colors.white,
                 fontSize: 14,
