@@ -47,7 +47,7 @@ final List<Map<String, dynamic>> _sampleComments = [
   },
 ];
 
-class CommentsView extends StatelessWidget {
+class CommentsView extends StatefulWidget {
   const CommentsView({super.key, required this.commentsCount});
 
   final int commentsCount;
@@ -66,16 +66,26 @@ class CommentsView extends StatelessWidget {
   }
 
   @override
+  State<CommentsView> createState() => _CommentsViewState();
+}
+
+class _CommentsViewState extends State<CommentsView> {
+  bool _sheetShown = false;
+
+  @override
   Widget build(BuildContext context) {
-    // This widget simply triggers the bottom sheet on build —
-    // typically you'd call CommentsView.show() directly instead.
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      showCommentsBottomSheet(
-        context,
-        comments: _sampleComments,
-        totalComments: commentsCount,
-      );
-    });
+    if (!_sheetShown) {
+      _sheetShown = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          showCommentsBottomSheet(
+            context,
+            comments: _sampleComments,
+            totalComments: widget.commentsCount,
+          );
+        }
+      });
+    }
     return const SizedBox.shrink();
   }
 }

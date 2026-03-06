@@ -115,8 +115,8 @@ class BottomSheetCommentCard extends StatelessWidget {
         // Replies
         if (replies != null && replies!.isNotEmpty) ...[
           const SizedBox(height: 12),
-          ...replies!.map(
-            (reply) => _ReplyCard(
+          for (final reply in replies!)
+            _ReplyCard(
               name: reply['name'] as String,
               time: reply['time'] as String,
               avatar: reply['avatar'] as String,
@@ -125,7 +125,6 @@ class BottomSheetCommentCard extends StatelessWidget {
               likes: reply['likes'] as int? ?? 0,
               isLiked: reply['isLiked'] as bool? ?? false,
             ),
-          ),
         ],
 
         // "View more replies" button

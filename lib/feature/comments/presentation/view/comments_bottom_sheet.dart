@@ -55,18 +55,22 @@ class CommentsBottomSheet extends StatelessWidget {
             child: ListView.separated(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
               itemCount: comments.length,
+              addAutomaticKeepAlives: false,
+              addRepaintBoundaries: true,
               separatorBuilder: (_, __) => const SizedBox(height: 24),
               itemBuilder: (context, index) {
                 final c = comments[index];
-                return BottomSheetCommentCard(
-                  name: c['name'] as String,
-                  time: c['time'] as String,
-                  avatar: c['avatar'] as String,
-                  text: c['text'] as String,
-                  likes: c['likes'] as int,
-                  isLiked: c['isLiked'] as bool? ?? false,
-                  replies: (c['replies'] as List<Map<String, dynamic>>?) ?? [],
-                  moreRepliesCount: c['moreRepliesCount'] as int? ?? 0,
+                return RepaintBoundary(
+                  child: BottomSheetCommentCard(
+                    name: c['name'] as String,
+                    time: c['time'] as String,
+                    avatar: c['avatar'] as String,
+                    text: c['text'] as String,
+                    likes: c['likes'] as int,
+                    isLiked: c['isLiked'] as bool? ?? false,
+                    replies: (c['replies'] as List<Map<String, dynamic>>?) ?? [],
+                    moreRepliesCount: c['moreRepliesCount'] as int? ?? 0,
+                  ),
                 );
               },
             ),

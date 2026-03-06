@@ -29,6 +29,16 @@ class _CommentLikesButtonState extends State<CommentLikesButton> {
     _likeCount = widget.initialLikes;
   }
 
+  @override
+  void didUpdateWidget(covariant CommentLikesButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.isLiked != widget.isLiked ||
+        oldWidget.initialLikes != widget.initialLikes) {
+      _isLiked = widget.isLiked;
+      _likeCount = widget.initialLikes;
+    }
+  }
+
   void _toggleLike() {
     setState(() {
       _isLiked = !_isLiked;

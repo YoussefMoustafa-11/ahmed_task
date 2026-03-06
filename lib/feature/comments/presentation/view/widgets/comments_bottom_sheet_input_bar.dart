@@ -45,7 +45,7 @@ class _CommentsBottomSheetInputBarState
 
   @override
   Widget build(BuildContext context) {
-    final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
+    final bottomPadding = MediaQuery.viewInsetsOf(context).bottom;
 
     return Container(
       decoration: BoxDecoration(
