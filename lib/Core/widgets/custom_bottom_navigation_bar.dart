@@ -11,9 +11,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
     final currentRoute = GoRouterState.of(context).matchedLocation;
 
     int currentIndex = 0;
-    if (currentRoute == AppRoutes.homeView)
+    if (currentRoute == AppRoutes.homeView) {
       currentIndex = 0;
-    else if (currentRoute == AppRoutes.exploreView)
+    } else if (currentRoute == AppRoutes.exploreView)
       currentIndex = 1;
     else if (currentRoute == AppRoutes.notificationsView)
       currentIndex = 2;

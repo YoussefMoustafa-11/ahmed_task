@@ -53,7 +53,7 @@ class _LoginViewState extends State<LoginView> {
               ),
               const SizedBox(height: 48),
               const Text('Email Address', style: AppTextStyle.labelMedium),
-              const SizedBox(height: 8),
+
               CustomTextField(
                 controller: _emailController,
                 hintText: "Enter your email address",
@@ -61,7 +61,7 @@ class _LoginViewState extends State<LoginView> {
               ),
               const SizedBox(height: 24),
               const PasswordField(),
-              const SizedBox(height: 8),
+
               CustomTextField(
                 controller: _passwordController,
                 isPassword: true,
