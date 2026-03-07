@@ -1,4 +1,4 @@
-import 'package:ahmed_task/feature/auth/presentation/view/widgets/social_button.dart';
+import 'package:ahmed_task/Core/widgets/social_button.dart';
 import 'package:flutter/material.dart';
 
 class SocialLoginButtons extends StatelessWidget {

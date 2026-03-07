@@ -4,10 +4,10 @@ import 'package:ahmed_task/Core/themes/app_text_style.dart';
 import 'package:ahmed_task/Core/widgets/custom_button.dart';
 import 'package:ahmed_task/Core/widgets/custom_text_field.dart';
 import 'package:ahmed_task/feature/auth/presentation/view/register/widgets/terms_and_privacy_text.dart';
-import 'package:ahmed_task/feature/auth/presentation/view/widgets/or_divider.dart';
-import 'package:ahmed_task/feature/auth/presentation/view/widgets/heading.dart';
-import 'package:ahmed_task/feature/auth/presentation/view/widgets/sign_up_link.dart';
-import 'package:ahmed_task/feature/auth/presentation/view/widgets/social_login_buttons.dart';
+import 'package:ahmed_task/Core/widgets/or_divider.dart';
+import 'package:ahmed_task/Core/widgets/heading.dart';
+import 'package:ahmed_task/Core/widgets/sign_up_link.dart';
+import 'package:ahmed_task/Core/widgets/social_login_buttons.dart';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

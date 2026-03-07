@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../../Core/themes/app_color.dart';
 import 'profile_image.dart';
-import 'stats_grid.dart';
+import 'package:ahmed_task/Core/widgets/stats_grid.dart';
 import 'action_buttons.dart';
 
 class ProfileInfoSection extends StatelessWidget {

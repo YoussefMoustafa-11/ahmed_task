@@ -1,9 +1,10 @@
+import 'package:ahmed_task/Core/widgets/custom_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'widgets/profile_header.dart';
 import 'widgets/profile_info_section.dart';
 import 'widgets/profile_tabs.dart';
 import 'widgets/profile_image_grid.dart';
-import 'widgets/bottom_navigation_bar.dart';
+
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -14,11 +15,12 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   int _selectedTabIndex = 0;
-  int _selectedNavIndex = 2;
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const CustomBottomNavigationBar(),
       backgroundColor: const Color(0xFFF6F7F8),
       body: Stack(
         children: [
@@ -44,17 +46,7 @@ class _ProfileViewState extends State<ProfileView> {
               ),
             ],
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: BottomNavigationBarWidget(
-              selectedIndex: _selectedNavIndex,
-              onItemSelected: (index) {
-                setState(() => _selectedNavIndex = index);
-              },
-            ),
-          ),
+          
         ],
       ),
     );

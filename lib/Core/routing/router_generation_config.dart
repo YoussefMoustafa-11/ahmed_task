@@ -3,7 +3,9 @@ import 'package:ahmed_task/feature/auth/presentation/view/register/view/register
 import 'package:ahmed_task/feature/comments/presentation/view/comments_view.dart';
 import 'package:ahmed_task/feature/create_post/presentation/view/create_post.dart';
 import 'package:ahmed_task/feature/edit_profile/presentation/view/edit_profile_view.dart';
+import 'package:ahmed_task/feature/explore/presentation/view/explore_view.dart';
 import 'package:ahmed_task/feature/home/presentation/view/home_view.dart';
+import 'package:ahmed_task/feature/notifications/presentation/view/notifications_view.dart';
 import 'package:ahmed_task/feature/profile/presentation/view/profile_view.dart';
 import 'package:ahmed_task/feature/reset_password_flow/presentation/view/create_new_password/create_new_password.dart';
 import 'package:ahmed_task/feature/reset_password_flow/presentation/view/forgot_password/forgot_password_view.dart';
@@ -16,7 +18,7 @@ import 'package:go_router/go_router.dart';
 
 class RouterGenerationConfig {
   static final goRouter = GoRouter(
-    initialLocation: AppRoutes.homeView,
+    initialLocation: AppRoutes.splash,
     routes: [
       GoRoute(
         path: AppRoutes.splashView,
@@ -39,12 +41,16 @@ class RouterGenerationConfig {
         builder: (context, state) => const HomeView(),
       ),
       GoRoute(
+        path: AppRoutes.exploreView,
+        name: AppRoutes.exploreView,
+        builder: (context, state) => const ExploreView(),
+      ),
+      GoRoute(
         path: AppRoutes.commentsView,
         name: AppRoutes.commentsView,
         builder: (context, state) {
           final extra = state.extra as Map<String, dynamic>?;
           return CommentsView(
-            postTitle: extra?['postTitle'] as String? ?? '',
             commentsCount: extra?['commentsCount'] as int? ?? 0,
           );
         },
@@ -101,6 +107,10 @@ class RouterGenerationConfig {
         name: AppRoutes.addStory,
         builder: (context, state) => const AddStoryView(),
       )
+        path: AppRoutes.notificationsView,
+        name: AppRoutes.notificationsView,
+        builder: (context, state) => const NotificationsView(),
+      ),
     ],
   );
 }

@@ -1,11 +1,11 @@
-import 'package:ahmed_task/Core/routing/app_routes.dart';
+import 'package:ahmed_task/feature/share_bottom_sheet/presentation/view/share_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:ahmed_task/Core/themes/app_color.dart';
 import 'package:ahmed_task/Core/themes/app_text_style.dart';
 import 'package:ahmed_task/feature/home/presentation/view/widgets/post_header.dart';
 import 'package:ahmed_task/feature/home/presentation/view/widgets/post_content.dart';
 import 'package:ahmed_task/feature/home/presentation/view/widgets/post_images.dart';
-import 'package:go_router/go_router.dart';
+import 'package:ahmed_task/feature/comments/presentation/view/comments_view.dart';
 
 class PostCard extends StatefulWidget {
   final String userImage;
@@ -123,12 +123,10 @@ class _PostCardState extends State<PostCard> {
                 // Comment Button
                 GestureDetector(
                   onTap: () {
-                    GoRouter.of(context).pushNamed(
-                      AppRoutes.commentsView,
-                      extra: {
-                        'postTitle': widget.content,
-                        "commentsCount": widget.commentsCount,
-                      },
+                    CommentsView.show(
+                      context,
+                      postTitle: widget.content,
+                      commentsCount: widget.commentsCount,
                     );
                   },
                   child: Row(
@@ -154,7 +152,9 @@ class _PostCardState extends State<PostCard> {
 
                 // Share Button
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    ShareBottomSheet.show(context);
+                  },
                   child: const Icon(
                     Icons.send_outlined,
                     color: AppColors.greyText,
