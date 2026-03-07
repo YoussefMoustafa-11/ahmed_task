@@ -31,18 +31,20 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: Text(
-            widget.label?.toUpperCase() ?? '',
-            style: AppTextStyle.labelMedium.copyWith(
-              color: const Color.fromARGB(255, 85, 99, 117),
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 0.8,
-            ),
-          ),
-        ),
+        widget.label != null
+            ? Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Text(
+                  widget.label?.toUpperCase() ?? '',
+                  style: AppTextStyle.labelMedium.copyWith(
+                    color: const Color.fromARGB(255, 85, 99, 117),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 0.8,
+                  ),
+                ),
+              )
+            : const SizedBox.shrink(),
         const SizedBox(height: 8),
         TextFormField(
           maxLines: widget.maxLines ?? 1,
