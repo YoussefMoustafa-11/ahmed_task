@@ -18,7 +18,7 @@ import 'package:go_router/go_router.dart';
 
 class RouterGenerationConfig {
   static final goRouter = GoRouter(
-    initialLocation: AppRoutes.splash,
+    initialLocation: AppRoutes.splashView,
     routes: [
       GoRoute(
         path: AppRoutes.splashView,
@@ -103,10 +103,11 @@ class RouterGenerationConfig {
         ),
       ),
       GoRoute(
-        path:  AppRoutes.addStory,
-        name: AppRoutes.addStory,
+              path:  AppRoutes.addStory,
+              name: AppRoutes.addStory,
         builder: (context, state) => const AddStoryView(),
-      )
+      ),
+      GoRoute(
         path: AppRoutes.notificationsView,
         name: AppRoutes.notificationsView,
         builder: (context, state) => const NotificationsView(),
