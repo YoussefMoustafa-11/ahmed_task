@@ -1,8 +1,9 @@
+import 'package:ahmed_task/Core/widgets/logo_with_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ahmed_task/Core/themes/app_color.dart';
 import 'widgets/password_form_section.dart';
 import 'widgets/password_requirements.dart';
-import 'widgets/reset_password_header.dart';
+
 import 'widgets/reset_password_footer.dart';
 
 /// Create New Password Screen
@@ -14,8 +15,7 @@ class CreateNewPasswordView extends StatefulWidget {
   const CreateNewPasswordView({super.key});
 
   @override
-  State<CreateNewPasswordView> createState() =>
-      _CreateNewPasswordScreenState();
+  State<CreateNewPasswordView> createState() => _CreateNewPasswordScreenState();
 }
 
 class _CreateNewPasswordScreenState extends State<CreateNewPasswordView> {
@@ -60,17 +60,18 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordView> {
 
   /// Handle reset password action
   void _handleResetPassword() {
+    // Validate form fields
     if (_newPasswordController.text.isEmpty ||
         _confirmPasswordController.text.isEmpty) {
       _showErrorSnackBar('Please fill in all fields');
       return;
     }
-
+    // Check if passwords match
     if (_newPasswordController.text != _confirmPasswordController.text) {
       _showErrorSnackBar('Passwords do not match');
       return;
     }
-
+    // Check if password meets requirements
     if (!_hasMinCharacters || !_hasSpecialCharacter) {
       _showErrorSnackBar('Password does not meet all requirements');
       return;
@@ -78,14 +79,6 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordView> {
 
     // TODO: Call API to reset password
     _showSuccessSnackBar('Password reset successfully');
-  }
-
-  /// Handle contact support action
-  void _handleContactSupport() {
-    // TODO: Navigate to support page or open support URL
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Contacting support...')));
   }
 
   void _showErrorSnackBar(String message) {
@@ -104,7 +97,16 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: _buildAppBar(context),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          color: AppColors.darkText,
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        centerTitle: false,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -112,7 +114,11 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordView> {
             children: [
               const SizedBox(height: 16),
               // Header Section
-              const ResetPasswordHeader(),
+              const LogoWithText(
+                subtitleTextAlign: TextAlign.left,
+                title: 'Create New Password',
+                subTitle: 'Please enter a new password for your account.',
+              ),
               const SizedBox(height: 40),
 
               // Form Section
@@ -130,29 +136,12 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordView> {
               const SizedBox(height: 40),
 
               // Footer Section with Button and Support Link
-              ResetPasswordFooter(
-                onResetPressed: _handleResetPassword,
-                onContactSupportPressed: _handleContactSupport,
-              ),
+              ResetPasswordFooter(onResetPressed: _handleResetPassword),
               const SizedBox(height: 40),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  /// Build app bar with back button
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios),
-        color: AppColors.darkText,
-        onPressed: () => Navigator.of(context).pop(),
-      ),
-      centerTitle: false,
     );
   }
 }

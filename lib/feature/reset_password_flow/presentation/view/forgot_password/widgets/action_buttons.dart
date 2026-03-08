@@ -1,3 +1,4 @@
+import 'package:ahmed_task/Core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class ActionButtons extends StatelessWidget {
@@ -15,76 +16,37 @@ class ActionButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedCrossFade(
-      firstChild: _SendLinkButton(onPressed: onSendLink),
-      secondChild: _SendOTPButton(onPressed: onSendOTP),
+      firstChild: CustomButton(
+        height: 50,
+        onPressed: onSendLink,
+        buttonText: 'Send code via Email',
+        icon: Icons.send,
+        backgroundColor: const Color(0xFF2b8cee),
+        foregroundColor: Colors.white,
+        borderRadius: 16,
+        elevation: 8,
+        shadowColor: const Color(0xFF2b8cee).withOpacity(0.25),
+        iconSize: 18,
+        iconSpacing: 8,
+      ),
+      secondChild: CustomButton(
+        height: 50,
+
+        onPressed: onSendOTP,
+        buttonText: 'Send OTP',
+        icon: Icons.sms,
+        backgroundColor: const Color(0xFF2b8cee),
+        foregroundColor: Colors.white,
+        borderRadius: 16,
+        elevation: 8,
+        shadowColor: const Color(0xFF2b8cee).withOpacity(0.25),
+        iconSize: 18,
+        iconSpacing: 8,
+      ),
       crossFadeState: isEmailMethod
           ? CrossFadeState.showFirst
           : CrossFadeState.showSecond,
       duration: const Duration(milliseconds: 300),
-    );
-  }
-}
-
-class _SendLinkButton extends StatelessWidget {
-  final VoidCallback onPressed;
-
-  const _SendLinkButton({required this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF2b8cee),
-        foregroundColor: Colors.white,
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        elevation: 8,
-        shadowColor: const Color(0xFF2b8cee).withOpacity(0.25),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            'Send code via Email',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-          ),
-          const SizedBox(width: 8),
-          Icon(Icons.send, size: 18, color: Colors.white),
-        ],
-      ),
-    );
-  }
-}
-
-class _SendOTPButton extends StatelessWidget {
-  final VoidCallback onPressed;
-
-  const _SendOTPButton({required this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF2b8cee),
-        foregroundColor: Colors.white,
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        elevation: 8,
-        shadowColor: const Color(0xFF2b8cee).withOpacity(0.25),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            'Send OTP',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-          ),
-          const SizedBox(width: 8),
-          Icon(Icons.sms, size: 18, color: Colors.white),
-        ],
-      ),
     );
   }
 }

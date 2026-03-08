@@ -20,10 +20,8 @@ class RecoveryMethodTabs extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          
-         
           Row(
-            children: [ 
+            children: [
               // Email Tab
               Expanded(
                 child: GestureDetector(

@@ -1,3 +1,4 @@
+import 'package:ahmed_task/Core/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 class PhoneInputGroup extends StatelessWidget {
@@ -55,6 +56,7 @@ class PhoneInputGroup extends StatelessWidget {
                       ),
                     )
                     .toList(),
+
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
@@ -83,35 +85,10 @@ class PhoneInputGroup extends StatelessWidget {
             ),
             const SizedBox(width: 10),
             Expanded(
-              child: TextField(
+              child: CustomTextField(
                 controller: phoneController,
                 keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                  hintText: '10123456789',
-                  fillColor: Colors.white,
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(14),
-                    borderSide: BorderSide(color: const Color(0xFFe2e8f0)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(14),
-                    borderSide: BorderSide(color: const Color(0xFFe2e8f0)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(14),
-                    borderSide: const BorderSide(
-                      color: Color(0xFF2b8cee),
-                      width: 2,
-                    ),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 12,
-                  ),
-                  hintStyle: TextStyle(color: Colors.grey[400]),
-                ),
-                style: Theme.of(context).textTheme.bodyMedium,
+                hintText: '10123456789',
               ),
             ),
           ],

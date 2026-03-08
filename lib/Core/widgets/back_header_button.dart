@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HeaderSection extends StatelessWidget {
-  const HeaderSection({super.key});
+class BackNavigationBar extends StatelessWidget {
+  const BackNavigationBar({super.key});
 
   @override
   Widget build(BuildContext context) {

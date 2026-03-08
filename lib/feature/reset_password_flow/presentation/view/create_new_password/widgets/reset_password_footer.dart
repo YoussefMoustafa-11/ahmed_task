@@ -6,11 +6,11 @@ import 'package:ahmed_task/Core/themes/app_text_style.dart';
 /// Footer section with reset password button and support link
 class ResetPasswordFooter extends StatelessWidget {
   final VoidCallback onResetPressed;
-  final VoidCallback? onContactSupportPressed;
+
   const ResetPasswordFooter({
     super.key,
     required this.onResetPressed,
-    this.onContactSupportPressed,
+ 
   });
 
   @override
@@ -41,7 +41,7 @@ class ResetPasswordFooter extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: onContactSupportPressed,
+              onTap: () {},
               child: Text(
                 'Contact Support',
                 style: AppTextStyle.labelMedium.copyWith(

@@ -1,10 +1,11 @@
 import 'package:ahmed_task/Core/routing/app_routes.dart';
 import 'package:ahmed_task/Core/widgets/custom_button.dart';
-import 'package:ahmed_task/feature/reset_password_flow/presentation/view/forgot_password/widgets/header_section.dart';
+import 'package:ahmed_task/Core/widgets/back_header_button.dart';
+import 'package:ahmed_task/feature/reset_password_flow/presentation/view/verification/widgets/custom_pin_code_text_field.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
+
 import 'package:ahmed_task/feature/reset_password_flow/presentation/view/verification/widgets/resend_section.dart';
-import 'package:ahmed_task/feature/reset_password_flow/presentation/view/verification/widgets/verification_content_section.dart';
+import 'package:ahmed_task/Core/widgets/logo_with_text.dart';
 import 'package:flutter/material.dart';
 
 class VerificationView extends StatelessWidget {
@@ -20,7 +21,8 @@ class VerificationView extends StatelessWidget {
           SafeArea(
             child: Column(
               children: [
-                const HeaderSection(),
+                const BackNavigationBar(),
+                //
                 Expanded(
                   child: Center(
                     child: SingleChildScrollView(
@@ -33,47 +35,24 @@ class VerificationView extends StatelessWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            VerificationContentSection(),
-                            SizedBox(height: 40),
-                            PinCodeTextField(
-                              appContext: context,
-                              length: 4,
-                              enableActiveFill: true,
-                              controller: controller,
-                              hintCharacter: '-',
-                              hintStyle: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFF6B7280),
-                              ),
-                              keyboardType: TextInputType.number,
-                              textStyle: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                                color: const Color(0xFF0F172A),
-                              ),
-                              pinTheme: PinTheme(
-                                shape: PinCodeFieldShape.box,
-                                borderRadius: BorderRadius.circular(8),
-                                activeBorderWidth: 2,
-                                inactiveBorderWidth: 1,
-                                fieldHeight: 60,
-                                fieldWidth: 50,
-
-                                activeFillColor: Colors.white,
-                                inactiveFillColor: Colors.white,
-                                selectedFillColor: Colors.white,
-                                activeColor: const Color(0xFF2B8CEE),
-                                inactiveColor: const Color(0xFF94A3B8),
-                                selectedColor: const Color(0xFF2B8CEE),
-                              ),
+                            // logo and text
+                            LogoWithText(
+                              title: 'Verification Code',
+                              subTitle:
+                                  'Enter the 4-digit code sent to your email',
+                              dataIcon: Icons.mark_email_read_rounded,
                             ),
+                            SizedBox(height: 40),
+                            // pin code field
+                            CustomPinCodeTextField(controller: controller),
                             SizedBox(height: 24),
                             CustomButton(
                               width: double.infinity,
                               height: 56,
                               onPressed: () {
-                                GoRouter.of(context).pushNamed(AppRoutes.createNewPasswordView);
+                                GoRouter.of(
+                                  context,
+                                ).pushNamed(AppRoutes.createNewPasswordView);
                               },
                               backgroundColor: const Color(0xFF2B8CEE),
                               foregroundColor: Colors.white,
@@ -86,6 +65,7 @@ class VerificationView extends StatelessWidget {
                               shadowColor: const Color(0x402B8CEE),
                             ),
                             SizedBox(height: 16),
+                            // review again
                             ResendSection(
                               remainingSeconds: 30,
                               onResend: () {},

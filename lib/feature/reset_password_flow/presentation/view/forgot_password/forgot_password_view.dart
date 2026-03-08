@@ -1,11 +1,12 @@
 import 'package:ahmed_task/Core/routing/app_routes.dart';
+import 'package:ahmed_task/Core/widgets/back_header_button.dart';
+import 'package:ahmed_task/Core/widgets/custom_text_field.dart';
+import 'package:ahmed_task/Core/widgets/logo_with_text.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'widgets/header_section.dart';
-import 'widgets/icon_section.dart';
-import 'widgets/title_section.dart';
+
 import 'widgets/recovery_method_tabs.dart';
-import 'widgets/email_input_group.dart';
+
 import 'widgets/phone_input_group.dart';
 import 'widgets/action_buttons.dart';
 import 'widgets/back_to_login_link.dart';
@@ -52,29 +53,39 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF6F7F8),
       body: Stack(
         children: [
           SingleChildScrollView(
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                const HeaderSection(),
+                const BackNavigationBar(),
                 const SizedBox(height: 8),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
                     children: [
-                      const IconSection(),
-                      const SizedBox(height: 15),
-                      const TitleSection(),
-                      const SizedBox(height: 16),
+                      LogoWithText(
+                        title: 'Forgot Password',
+                        subTitle:
+                            'Select which contact details should we use to reset your password',
+                        dataIcon: Icons.lock_reset,
+                      ),
+                      const SizedBox(height: 40),
+                      //review again
                       RecoveryMethodTabs(
                         isEmailMethod: _isEmailMethod,
                         onMethodChanged: _onMethodChanged,
                       ),
                       const SizedBox(height: 15),
                       if (_isEmailMethod)
-                        EmailInputGroup(controller: _emailController)
+                        CustomTextField(
+                          controller: _emailController,
+                          label: 'Email Address',
+                          hintText: 'name@example.com',
+                          prefixIcon: Icons.mail,
+                        )
                       else
                         PhoneInputGroup(
                           phoneController: _phoneController,
@@ -82,12 +93,15 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                           onCountryCodeChanged: _onCountryCodeChanged,
                         ),
                       const SizedBox(height: 60),
+                      //review again                   
                       ActionButtons(
                         isEmailMethod: _isEmailMethod,
                         onSendLink: () {
                           GoRouter.of(context).push(AppRoutes.verificationView);
                         },
-                        onSendOTP: () {},
+                        onSendOTP: () {
+                          GoRouter.of(context).push(AppRoutes.verificationView);
+                        },
                       ),
                       const SizedBox(height: 30),
                       BackToLoginLink(onTap: () => Navigator.pop(context)),

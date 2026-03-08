@@ -9,6 +9,7 @@ class CustomTextField extends StatefulWidget {
   final String? label;
   final IconData? prefixIcon;
   final int? maxLines;
+  final TextInputType? keyboardType;
   const CustomTextField({
     super.key,
     required this.controller,
@@ -17,6 +18,7 @@ class CustomTextField extends StatefulWidget {
     this.prefixIcon,
     this.label,
     this.maxLines,
+    this.keyboardType,
   });
 
   @override
@@ -49,9 +51,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
         TextFormField(
           maxLines: widget.maxLines ?? 1,
           controller: widget.controller,
-          keyboardType: widget.isPassword
-              ? TextInputType.text
-              : TextInputType.emailAddress,
+          keyboardType:
+              widget.keyboardType ??
+              (widget.isPassword
+                  ? TextInputType.text
+                  : TextInputType.emailAddress),
           style: AppTextStyle.inputText,
           obscureText: widget.isPassword && !isPasswordVisible,
           decoration: InputDecoration(
