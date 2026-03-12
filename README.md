@@ -1,6 +1,3 @@
-# ahmed_task
+# Social media application
 
-A new Flutter project.
-
-I waiting the API to  integration with the app eng/Ahmed
 
